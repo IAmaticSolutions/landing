@@ -89,7 +89,7 @@
     line-height: 1.6;
     color: var(--muted);
     max-width: 46ch;
-    margin-top: 18px;
+    margin: 18px auto 0;
   }
 
   /* ---------- hero ---------- */
@@ -361,7 +361,109 @@
   @media (max-width: 420px) {
     .strip { grid-template-columns: 1fr; }
   }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 14, 23, 0.88);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink-line);
+  }
+  .nav-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--paper);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    background: var(--signal);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13.5px;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+  }
+  .nav-cta:hover { background: #38d49e; }
+  .nav-cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item { border-top: 1px solid var(--ink-line); }
+  .faq-item:first-of-type { border-top: none; }
+  .faq-item summary {
+    padding: 18px 0;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15.5px;
+    color: var(--paper);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 19px;
+    color: var(--signal);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p {
+    padding: 0 0 20px;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item summary::after { transition: none; }
+  }
+
+  /* ---------- guarantee line ---------- */
+  .guarantee {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+
+  footer .tagline {
+    color: var(--paper);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 </style>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">IAutomatic Solutions</span>
+    <a class="nav-cta" href="https://wa.me/5490000000000">Hablemos</a>
+  </div>
+</header>
 
 <div class="wrap">
 
@@ -500,6 +602,40 @@
     </div>
   </section>
 
+  <section>
+    <div class="divider"><span>Preguntas frecuentes</span></div>
+
+    <details class="faq-item">
+      <summary>¿Es la API oficial de WhatsApp?</summary>
+      <p>No, es una conexión tipo WhatsApp Web — la misma tecnología que usás cuando escaneás un código QR en la computadora. Funciona perfecto para responder a los clientes que ya te escriben. Para campañas masivas a desconocidos existe otra solución, más cara y con más trámites.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Cuánto tarda en estar funcionando?</summary>
+      <p>Depende de cuánto catálogo y detalle tenga tu negocio, pero lo habitual son pocos días desde que me contás todo hasta que está respondiendo en tu WhatsApp real.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Qué pasa si cambio mis precios?</summary>
+      <p>Se actualiza cuando quieras. El agente solo puede decir los precios que estén cargados, así que si subís una tarifa, me avisás y se actualiza — no hay riesgo de que siga cotizando con el precio viejo.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Puede llegar a inventar algo o decir cualquier cosa?</summary>
+      <p>Tiene un filtro que bloquea el mensaje entero si intenta decir un precio o un enlace que no le diste vos. No es magia perfecta, pero está pensado justo para evitar el problema más común de los bots con IA: que prometan algo que el negocio no puede cumplir.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Tengo que saber de tecnología?</summary>
+      <p>No. Vos me contás tu negocio, yo lo armo y lo dejo funcionando. Del día a día no tenés que tocar nada — podés ver las conversaciones desde un panel simple si querés, pero no es obligatorio.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Qué pasa con los datos de mis clientes?</summary>
+      <p>Quedan en una base de datos propia de tu negocio, no en una plataforma externa compartida con otros usuarios. Sos dueño de esa información.</p>
+    </details>
+  </section>
+
   <section class="cta">
     <div class="divider"><span>Hablemos</span></div>
     <h2>¿Charlamos de tu negocio?</h2>
@@ -515,11 +651,13 @@
         </span>
       </div>
     </a>
+    <p class="guarantee">Sin permanencia forzosa — cancelás el mantenimiento cuando quieras.</p>
   </section>
 
   <footer>
-    <p>IAutomatic Solutions — agentes de WhatsApp con IA, a medida de cada negocio.</p>
-    <p class="edit-note">Falta reemplazar el número de wa.me del botón "Escribir por WhatsApp" antes de compartirlo.</p>
+    <p class="tagline">IAutomatic Solutions</p>
+    <p>Agentes de WhatsApp con inteligencia artificial, armados a medida para cada negocio — sin plantillas genéricas, sin plataformas compartidas.</p>
+    <p class="edit-note">Falta reemplazar el número de wa.me del botón "Escribir por WhatsApp" (aparece 2 veces: arriba y abajo) antes de compartirlo.</p>
   </footer>
 
 </div>
