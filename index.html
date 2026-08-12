@@ -1,0 +1,525 @@
+<title>Mientras dormís, tu WhatsApp sigue vendiendo</title>
+<style>
+  :root {
+    --ink: #0a0e17;
+    --ink-raised: #141b2b;
+    --ink-line: #232c42;
+    --paper: #ece8df;
+    --muted: #8b93a9;
+    --signal: #2fbe8f;
+    --signal-dim: #1f8f6a;
+    --spark: #f2a93c;
+
+    --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- day-divider chip, reused as a structural motif ---------- */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 0 28px;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--ink-line);
+  }
+  .divider span {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  section { padding: 64px 0; }
+  section:first-of-type { padding-top: 56px; }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(32px, 7vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+  }
+
+  h2 {
+    font-size: clamp(24px, 5vw, 30px);
+    line-height: 1.2;
+    color: var(--paper);
+    margin-bottom: 16px;
+  }
+
+  p { margin: 0; }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 46ch;
+    margin-top: 18px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero-top { text-align: center; }
+  .hero-copy { text-align: center; margin: 0 auto; }
+
+  /* ---------- phone mockup ---------- */
+  .phone {
+    margin: 44px auto 0;
+    max-width: 320px;
+    background: var(--ink-raised);
+    border: 1px solid var(--ink-line);
+    border-radius: 28px;
+    padding: 10px 10px 16px;
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  }
+  .phone-notch {
+    width: 70px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--ink-line);
+    margin: 2px auto 12px;
+  }
+  .phone-screen {
+    background: #0d1420;
+    border-radius: 16px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 320px;
+  }
+  .bubble-row { display: flex; }
+  .bubble-row.in { justify-content: flex-start; }
+  .bubble-row.out { justify-content: flex-end; }
+
+  .bubble {
+    max-width: 78%;
+    padding: 9px 12px;
+    border-radius: 14px;
+    font-size: 14.5px;
+    line-height: 1.4;
+  }
+  .bubble.in {
+    background: #1c2436;
+    color: var(--paper);
+    border-bottom-left-radius: 4px;
+  }
+  .bubble.out {
+    background: var(--signal-dim);
+    color: #eafff5;
+    border-bottom-right-radius: 4px;
+  }
+
+  .stamp {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 10.5px;
+    color: var(--muted);
+    text-align: center;
+    margin: 6px 0 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .typing {
+    display: inline-flex;
+    gap: 3px;
+    padding: 10px 12px;
+  }
+  .typing i {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--muted);
+    display: block;
+    animation: blink 1.3s infinite ease-in-out;
+  }
+  .typing i:nth-child(2) { animation-delay: 0.15s; }
+  .typing i:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .typing i { animation: none; opacity: 0.6; }
+  }
+
+  /* ---------- pain callout ---------- */
+  .callout {
+    border: 1px solid var(--ink-line);
+    background: var(--ink-raised);
+    border-radius: 4px;
+    padding: 22px 22px 24px;
+    position: relative;
+  }
+  .callout::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--spark);
+    border-radius: 4px 0 0 4px;
+  }
+  .callout-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--spark);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .callout p {
+    color: var(--paper);
+    font-size: 16.5px;
+    line-height: 1.65;
+  }
+  .callout strong { color: var(--paper); font-weight: 600; }
+
+  /* ---------- feature demos ---------- */
+  .feature { padding: 40px 0; border-top: 1px solid var(--ink-line); }
+  .feature:first-of-type { border-top: none; padding-top: 0; }
+
+  .feature-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .feature h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 23px;
+    color: var(--paper);
+    margin: 0 0 18px;
+  }
+
+  .mini-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+  .mini-thread .bubble { font-size: 14px; }
+
+  .feature-note {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 52ch;
+  }
+
+  /* ---------- process ---------- */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: 1px solid var(--ink-line);
+  }
+  .step:first-child { border-top: none; padding-top: 0; }
+  .step-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--signal);
+    padding-top: 3px;
+  }
+  .step h4 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16.5px;
+    color: var(--paper);
+    margin: 0 0 6px;
+  }
+  .step p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ---------- feature list strip ---------- */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--ink-line);
+    border: 1px solid var(--ink-line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .strip-item {
+    background: var(--ink-raised);
+    padding: 18px 16px;
+  }
+  .strip-item b {
+    display: block;
+    color: var(--paper);
+    font-size: 14.5px;
+    margin-bottom: 4px;
+  }
+  .strip-item span {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta { text-align: center; }
+  .cta h2 { text-align: center; }
+  .cta .lede { text-align: center; margin-left: auto; margin-right: auto; }
+
+  .input-bar {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink-raised);
+    border: 1px solid var(--ink-line);
+    border-radius: 999px;
+    padding: 6px 6px 6px 20px;
+  }
+  .input-bar span {
+    flex: 1;
+    text-align: left;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .send-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--signal);
+    flex-shrink: 0;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .send-btn:hover { background: #38d49e; transform: scale(1.04); }
+  .send-btn:focus-visible {
+    outline: 2px solid var(--paper);
+    outline-offset: 3px;
+  }
+  a.cta-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  footer {
+    padding: 40px 0 56px;
+    text-align: center;
+  }
+  footer p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  footer .edit-note {
+    margin-top: 14px;
+    color: var(--ink-line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  @media (max-width: 420px) {
+    .strip { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="wrap">
+
+  <section class="hero-top">
+    <div class="divider"><span>23:47 · un cliente te está escribiendo</span></div>
+    <div class="hero-copy">
+      <h1>Mientras dormís,<br>tu WhatsApp puede<br>seguir vendiendo.</h1>
+      <p class="lede">
+        Un agente con inteligencia artificial que responde, cotiza y cierra por vos
+        — las 24 horas, sonando como una persona, no como un bot de menú.
+      </p>
+    </div>
+
+    <div class="phone" role="img" aria-label="Conversación de ejemplo: un cliente pide turno a la noche y el agente responde al instante">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="stamp">HOY 23:47</div>
+        <div class="bubble-row in"><div class="bubble in">Holaa disculpen la hora, el sábado a las 10 tienen lugar?</div></div>
+        <div class="bubble-row out"><div class="bubble out">Hola! Sí, el sábado 10hs está libre</div></div>
+        <div class="bubble-row out"><div class="bubble out">Te reservo el turno?</div></div>
+        <div class="bubble-row in"><div class="bubble in">Dale, soy Caro</div></div>
+        <div class="bubble-row out"><div class="bubble out">Buenísimo Caro, quedás anotada para el sábado a las 10</div></div>
+        <div class="bubble-row in">
+          <div class="bubble in typing" aria-label="escribiendo">
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider"><span>Lo que pasa hoy, sin agente</span></div>
+    <div class="callout">
+      <span class="callout-tag">A las 9 de la noche</span>
+      <p>
+        Te escriben tres personas. Le contestás a una, la segunda se cansa de
+        esperar y le escribe a la competencia, la tercera se olvida
+        directamente. <strong>Cada mensaje sin respuesta a tiempo es una venta
+        que ni te enteraste que perdiste.</strong>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider"><span>Cómo responde de verdad</span></div>
+
+    <div class="feature">
+      <span class="feature-label">No inventa precios</span>
+      <h3>Dice solo lo que vos autorizaste</h3>
+      <div class="mini-thread">
+        <div class="bubble-row in"><div class="bubble in">Cuánto sale el tratamiento completo?</div></div>
+        <div class="bubble-row out"><div class="bubble out">El tratamiento completo son $45.000, en 3 sesiones</div></div>
+      </div>
+      <p class="feature-note">
+        Tiene un límite de seguridad: si en algún momento intenta decir un
+        precio o mandar un enlace que vos no aprobaste, el sistema bloquea
+        ese mensaje antes de que le llegue al cliente.
+      </p>
+    </div>
+
+    <div class="feature">
+      <span class="feature-label">Se acuerda de quién le escribe</span>
+      <h3>No arranca de cero cada vez</h3>
+      <div class="mini-thread">
+        <div class="bubble-row in"><div class="bubble in">Hola, te escribí hace como un mes, no sé si te dije mi nombre</div></div>
+        <div class="bubble-row out"><div class="bubble out">Hola de nuevo! Sos Fernando, habíamos hablado del plan mensual</div></div>
+      </div>
+      <p class="feature-note">
+        Reconoce a cada persona por su número, aunque vuelva a escribir
+        semanas o meses después, y retoma donde quedaron.
+      </p>
+    </div>
+
+    <div class="feature">
+      <span class="feature-label">Cierra la venta ahí mismo</span>
+      <h3>Del "cuánto sale" al pago, sin salir del chat</h3>
+      <div class="mini-thread">
+        <div class="bubble-row in"><div class="bubble in">Buenísimo, cómo pago la seña?</div></div>
+        <div class="bubble-row out"><div class="bubble out">Te paso el link, pagás y queda reservado automático</div></div>
+      </div>
+      <p class="feature-note">
+        Puede generar el link de pago, confirmar solo cuando el pago se
+        acredita de verdad, y avisarte a vos cuando entra un pedido — sin que
+        tengas que estar mirando el chat todo el día.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider"><span>Además</span></div>
+    <div class="strip">
+      <div class="strip-item">
+        <b>Disponible 24/7</b>
+        <span>Fines de semana, feriados, de madrugada. No tiene horario de cierre.</span>
+      </div>
+      <div class="strip-item">
+        <b>Es tuyo</b>
+        <span>Corre en tu propio número y tu propia base de datos. No depende de una plataforma de terceros.</span>
+      </div>
+      <div class="strip-item">
+        <b>A tu medida</b>
+        <span>Catálogo, precios, tono de voz y forma de cerrar: todo ajustado a cómo vendés vos.</span>
+      </div>
+      <div class="strip-item">
+        <b>Te avisa si algo falla</b>
+        <span>Si el agente se queda sin responder, te llega un aviso a vos antes de que lo note un cliente.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="divider"><span>Cómo se implementa</span></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div>
+          <h4>Contamos tu negocio</h4>
+          <p>Catálogo, precios, tono, forma de cerrar. Una charla, no un formulario.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div>
+          <h4>Lo armamos y lo probamos</h4>
+          <p>Se prueba en tu propio WhatsApp antes de salir en vivo con clientes reales.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div>
+          <h4>Empieza a responder solo</h4>
+          <p>Vos seguís con tu negocio. El agente atiende mientras tanto, y vos ves todo desde un panel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="divider"><span>Hablemos</span></div>
+    <h2>¿Charlamos de tu negocio?</h2>
+    <p class="lede">Contame qué vendés y te muestro cómo se vería tu propio agente.</p>
+
+    <a class="cta-link" href="https://wa.me/5490000000000" aria-label="Escribir por WhatsApp">
+      <div class="input-bar">
+        <span>Escribir por WhatsApp</span>
+        <span class="send-btn" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#0a0e17" stroke="#0a0e17" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <p>[Tu nombre o tu marca] — agentes de WhatsApp con IA, a medida de cada negocio.</p>
+    <p class="edit-note">Reemplazá el número de wa.me del botón y esta línea con tus datos antes de compartirlo.</p>
+  </footer>
+
+</div>
