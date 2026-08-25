@@ -275,6 +275,17 @@
     max-width: 52ch;
   }
 
+  .system-note {
+    text-align: center;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    padding: 4px 0 2px;
+  }
+  .system-note::before { content: "· "; }
+  .system-note::after { content: " ·"; }
+
   /* ---------- process ---------- */
   .steps {
     display: flex;
@@ -499,7 +510,7 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <span class="nav-brand">IAutomatic Solutions</span>
+    <span class="nav-brand">IAmatic Solutions</span>
     <a class="nav-cta" href="https://wa.me/5491135841243">Hablemos</a>
   </div>
 </header>
@@ -590,6 +601,38 @@
         tengas que estar mirando el chat todo el día.
       </p>
     </div>
+
+    <div class="feature">
+      <span class="feature-label">Nunca pisa un turno</span>
+      <h3>Si tenés varias personas atendiendo, revisa la agenda real de cada una</h3>
+      <div class="mini-thread">
+        <div class="bubble-row in"><div class="bubble in">Quiero turno con Ana para el sábado a las 10</div></div>
+        <div class="bubble-row out"><div class="bubble out">Dejame ver... a las 10 Ana ya tiene otra clienta, pero tiene libre a las 11</div></div>
+        <div class="bubble-row in"><div class="bubble in">Dale, las 11 entonces</div></div>
+        <div class="bubble-row out"><div class="bubble out">Perfecto, quedás con Ana el sábado 11hs</div></div>
+      </div>
+      <p class="feature-note">
+        Antes de confirmar cualquier turno cruza la agenda de verdad — la
+        tuya o la de cada profesional por separado si tenés equipo — así que
+        nunca promete un horario que ya está ocupado.
+      </p>
+    </div>
+
+    <div class="feature">
+      <span class="feature-label">No se pisa con vos</span>
+      <h3>Si le contestás vos mismo, se da cuenta y se queda callado</h3>
+      <div class="mini-thread">
+        <div class="bubble-row in"><div class="bubble in">Hola, quería consultar algo puntual antes de reservar</div></div>
+        <div class="bubble-row out"><div class="bubble out">Hola! te contesto yo directamente, dame 2 minutos 🙂</div></div>
+        <div class="system-note">El agente notó que contestaste vos y se puso en pausa</div>
+      </div>
+      <p class="feature-note">
+        Un cliente puntual, un reclamo, lo que sea — si en algún momento le
+        escribís vos desde tu propio celular, el agente lo detecta solo y no
+        se cruza con lo que estás diciendo. Retoma automáticamente más tarde,
+        sin que tengas que avisarle ni tocar ningún panel.
+      </p>
+    </div>
   </section>
 
   <section>
@@ -610,6 +653,14 @@
       <div class="strip-item">
         <b>Te avisa si algo falla</b>
         <span>Si el agente se queda sin responder, te llega un aviso a vos antes de que lo note un cliente.</span>
+      </div>
+      <div class="strip-item">
+        <b>Entiende varios idiomas</b>
+        <span>Si te escriben en inglés o italiano, responde en el mismo idioma sin que hagas nada.</span>
+      </div>
+      <div class="strip-item">
+        <b>Cobra como ya cobrás</b>
+        <span>Mercado Pago, PayPal o Satispay — el que ya uses, sin que el cliente note la diferencia.</span>
       </div>
     </div>
   </section>
@@ -644,7 +695,7 @@
   <section>
     <div class="divider"><span>Quiénes somos</span></div>
     <p class="about-text">
-      Somos <strong>IAutomatic Solutions</strong>, un equipo nuevo enfocado en
+      Somos <strong>IAmatic Solutions</strong>, un equipo nuevo enfocado en
       un solo problema: que ningún negocio pierda una venta por no llegar a
       tiempo a un WhatsApp. No vendemos una plataforma genérica — armamos cada
       agente a medida, negocio por negocio, y lo probamos en tu propio
@@ -684,6 +735,16 @@
       <summary>¿Qué pasa con los datos de mis clientes?</summary>
       <p>Quedan en una base de datos propia de tu negocio, no en una plataforma externa compartida con otros usuarios. Sos dueño de esa información.</p>
     </details>
+
+    <details class="faq-item">
+      <summary>¿Y si tengo más de una persona atendiendo turnos?</summary>
+      <p>El agente maneja varias personas a la vez: el cliente elige (o vos definís) quién lo atiende, y cada una tiene su propia agenda con sus propios horarios — nunca se pisan los turnos entre sí, aunque dos clientas reserven al mismo tiempo con profesionales distintas.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>¿Puedo meterme yo en una conversación puntual?</summary>
+      <p>Sí, cuando quieras — le contestás al cliente directamente desde tu propio WhatsApp y el agente se da cuenta solo: se queda en silencio esa conversación puntual y retoma automáticamente más tarde. No hace falta avisarle ni tocar ningún panel.</p>
+    </details>
   </section>
 
   <section class="cta">
@@ -705,7 +766,7 @@
   </section>
 
   <footer>
-    <p class="tagline">IAutomatic Solutions</p>
+    <p class="tagline">IAmatic Solutions</p>
     <p>Agentes de WhatsApp con inteligencia artificial, armados a medida para cada negocio — sin plantillas genéricas, sin plataformas compartidas.</p>
     <p class="edit-note">Falta crear y subir og-image.png (1200x630px) para que el link muestre una imagen de vista previa al compartirlo.</p>
   </footer>
