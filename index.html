@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mientras dormís, tu WhatsApp sigue vendiendo</title>
+<link rel="icon" type="image/jpeg" href="logo-mark.jpg">
 
 <meta name="description" content="Un agente con inteligencia artificial que responde, cotiza y cierra ventas por WhatsApp las 24 horas — armado a medida para tu negocio, sin plataformas compartidas.">
 
@@ -422,11 +423,20 @@
     gap: 16px;
   }
   .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     font-family: var(--font-display);
     font-size: 17px;
     color: var(--paper);
     text-decoration: none;
     letter-spacing: 0.01em;
+  }
+  .nav-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    display: block;
   }
   .nav-cta {
     display: inline-flex;
@@ -504,7 +514,7 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <span class="nav-brand">IAmatic Solutions</span>
+    <span class="nav-brand"><img src="logo-mark.jpg" alt="" class="nav-logo">IAmatic Solutions</span>
     <a class="nav-cta" href="https://wa.me/5491135841243">Hablemos</a>
   </div>
 </header>
