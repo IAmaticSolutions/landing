@@ -403,57 +403,25 @@
     .strip { grid-template-columns: 1fr; }
   }
 
-  /* ---------- nav ---------- */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(10, 14, 23, 0.88);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--ink-line);
+  /* ---------- masthead: logo + nombre, arriba de todo, NO fijo/sticky ---------- */
+  .masthead {
+    text-align: center;
+    padding: 48px 24px 12px;
   }
-  .nav-inner {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .nav-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    font-family: var(--font-display);
-    font-size: 17px;
-    color: var(--paper);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-  }
-  .nav-logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 16px;
+  .masthead-logo {
+    width: 160px;
+    height: 160px;
+    border-radius: 24px;
     display: block;
+    margin: 0 auto 20px;
   }
-  .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    background: var(--signal);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 13.5px;
-    text-decoration: none;
-    padding: 9px 18px;
-    border-radius: 999px;
-    white-space: nowrap;
-    transition: background 0.15s ease;
+  .masthead-name {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4.5vw, 30px);
+    color: var(--paper);
+    letter-spacing: 0.01em;
+    margin: 0;
   }
-  .nav-cta:hover { background: #38d49e; }
-  .nav-cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
 
   /* ---------- FAQ ---------- */
   .faq-item { border-top: 1px solid var(--ink-line); }
@@ -512,11 +480,9 @@
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <span class="nav-brand"><img src="logo-mark.jpg" alt="" class="nav-logo">IAmatic Solutions</span>
-    <a class="nav-cta" href="https://wa.me/5491135841243">Hablemos</a>
-  </div>
+<header class="masthead">
+  <img src="logo-mark.jpg" alt="IAmatic Solutions" class="masthead-logo">
+  <p class="masthead-name">IAmatic Solutions</p>
 </header>
 
 <div class="wrap">
