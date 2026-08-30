@@ -432,6 +432,48 @@
     margin: 0;
   }
 
+  /* ---------- selector de idioma (fijo, arriba a la derecha) ---------- */
+  .lang-switcher {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    display: flex;
+    gap: 6px;
+    background: var(--ink-raised);
+    border: 1px solid var(--ink-line);
+    border-radius: 999px;
+    padding: 5px;
+  }
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 26px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+  }
+  .lang-btn svg { border-radius: 3px; display: block; }
+  .lang-btn:hover { opacity: 0.85; }
+  .lang-btn[aria-pressed="true"] {
+    opacity: 1;
+    border-color: var(--signal);
+  }
+  .lang-btn:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+  @media (max-width: 380px) {
+    .lang-switcher { top: 10px; right: 10px; padding: 4px; gap: 4px; }
+    .lang-btn { width: 28px; height: 22px; }
+  }
+
   /* ---------- FAQ ---------- */
   .faq-item { border-top: 1px solid var(--ink-line); }
   .faq-item:first-of-type { border-top: none; }
@@ -489,6 +531,24 @@
 </head>
 <body>
 
+<div class="lang-switcher" role="group" aria-label="Idioma / Language / Lingua">
+  <button type="button" class="lang-btn" data-lang="es" aria-label="Español" aria-pressed="true">
+    <svg viewBox="0 0 24 16" width="26" height="18" aria-hidden="true"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></svg>
+  </button>
+  <button type="button" class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">
+    <svg viewBox="0 0 24 16" width="26" height="18" aria-hidden="true">
+      <rect width="24" height="16" fill="#00247d"/>
+      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" stroke-width="3.2"/>
+      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#cf142b" stroke-width="1.3"/>
+      <path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="5.5"/>
+      <path d="M12,0 V16 M0,8 H24" stroke="#cf142b" stroke-width="2.6"/>
+    </svg>
+  </button>
+  <button type="button" class="lang-btn" data-lang="it" aria-label="Italiano" aria-pressed="false">
+    <svg viewBox="0 0 24 16" width="26" height="18" aria-hidden="true"><rect width="8" height="16" fill="#009246"/><rect x="8" width="8" height="16" fill="#F1F2F1"/><rect x="16" width="8" height="16" fill="#CE2B37"/></svg>
+  </button>
+</div>
+
 <header class="masthead">
   <img src="logo-mark.jpg" alt="IAmatic Solutions" class="masthead-logo">
   <p class="masthead-name">IAmatic Solutions</p>
@@ -497,26 +557,26 @@
 <div class="wrap">
 
   <section class="hero-top">
-    <div class="divider"><span>23:47 · un cliente te está escribiendo</span></div>
+    <div class="divider"><span data-i18n="hero.time">23:47 · un cliente te está escribiendo</span></div>
     <div class="hero-copy">
-      <h1>Mientras dormís,<br>tu WhatsApp puede<br>seguir vendiendo.</h1>
-      <p class="lede">
+      <h1 data-i18n="hero.title">Mientras dormís,<br>tu WhatsApp puede<br>seguir vendiendo.</h1>
+      <p class="lede" data-i18n="hero.lede">
         Un agente con inteligencia artificial que responde, cotiza y cierra por vos
         — las 24 horas, sonando como una persona, no como un bot de menú.
       </p>
     </div>
 
-    <div class="phone" role="img" aria-label="Conversación de ejemplo: un cliente pide turno a la noche y el agente responde al instante">
+    <div class="phone" role="img" data-i18n-aria="hero.phoneAria" aria-label="Conversación de ejemplo: un cliente pide turno a la noche y el agente responde al instante">
       <div class="phone-notch"></div>
       <div class="phone-screen">
-        <div class="stamp">HOY 23:47</div>
-        <div class="bubble-row in"><div class="bubble in">Holaa disculpen la hora, el sábado a las 10 tienen lugar?</div></div>
-        <div class="bubble-row out"><div class="bubble out">Hola! Sí, el sábado 10hs está libre</div></div>
-        <div class="bubble-row out"><div class="bubble out">Te reservo el turno?</div></div>
-        <div class="bubble-row in"><div class="bubble in">Dale, soy Caro</div></div>
-        <div class="bubble-row out"><div class="bubble out">Buenísimo Caro, quedás anotada para el sábado a las 10</div></div>
+        <div class="stamp" data-i18n="hero.stamp">HOY 23:47</div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="hero.msg1">Holaa disculpen la hora, el sábado a las 10 tienen lugar?</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="hero.msg2">Hola! Sí, el sábado 10hs está libre</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="hero.msg3">Te reservo el turno?</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="hero.msg4">Dale, soy Caro</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="hero.msg5">Buenísimo Caro, quedás anotada para el sábado a las 10</div></div>
         <div class="bubble-row in">
-          <div class="bubble in typing" aria-label="escribiendo">
+          <div class="bubble in typing" data-i18n-aria="hero.typingAria" aria-label="escribiendo">
             <i></i><i></i><i></i>
           </div>
         </div>
@@ -525,10 +585,10 @@
   </section>
 
   <section>
-    <div class="divider"><span>Lo que pasa hoy, sin agente</span></div>
+    <div class="divider"><span data-i18n="pain.divider">Lo que pasa hoy, sin agente</span></div>
     <div class="callout">
-      <span class="callout-tag">A las 9 de la noche</span>
-      <p>
+      <span class="callout-tag" data-i18n="pain.tag">A las 9 de la noche</span>
+      <p data-i18n="pain.text">
         Te escriben tres personas. Le contestás a una, la segunda se cansa de
         esperar y le escribe a la competencia, la tercera se olvida
         directamente. <strong>Cada mensaje sin respuesta a tiempo es una venta
@@ -538,16 +598,16 @@
   </section>
 
   <section>
-    <div class="divider"><span>Cómo responde de verdad</span></div>
+    <div class="divider"><span data-i18n="features.divider">Cómo responde de verdad</span></div>
 
     <div class="feature">
-      <span class="feature-label">No inventa precios</span>
-      <h3>Dice solo lo que vos autorizaste</h3>
+      <span class="feature-label" data-i18n="features.f1.label">No inventa precios</span>
+      <h3 data-i18n="features.f1.title">Dice solo lo que vos autorizaste</h3>
       <div class="mini-thread">
-        <div class="bubble-row in"><div class="bubble in">Cuánto sale el tratamiento completo?</div></div>
-        <div class="bubble-row out"><div class="bubble out">El tratamiento completo son $45.000, en 3 sesiones</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f1.msg1">Cuánto sale el tratamiento completo?</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f1.msg2">El tratamiento completo son $45.000, en 3 sesiones</div></div>
       </div>
-      <p class="feature-note">
+      <p class="feature-note" data-i18n="features.f1.note">
         Tiene un límite de seguridad: si en algún momento intenta decir un
         precio o mandar un enlace que vos no aprobaste, el sistema bloquea
         ese mensaje antes de que le llegue al cliente.
@@ -555,26 +615,26 @@
     </div>
 
     <div class="feature">
-      <span class="feature-label">Se acuerda de quién le escribe</span>
-      <h3>No arranca de cero cada vez</h3>
+      <span class="feature-label" data-i18n="features.f2.label">Se acuerda de quién le escribe</span>
+      <h3 data-i18n="features.f2.title">No arranca de cero cada vez</h3>
       <div class="mini-thread">
-        <div class="bubble-row in"><div class="bubble in">Hola, te escribí hace como un mes, no sé si te dije mi nombre</div></div>
-        <div class="bubble-row out"><div class="bubble out">Hola de nuevo! Sos Fernando, habíamos hablado del plan mensual</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f2.msg1">Hola, te escribí hace como un mes, no sé si te dije mi nombre</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f2.msg2">Hola de nuevo! Sos Fernando, habíamos hablado del plan mensual</div></div>
       </div>
-      <p class="feature-note">
+      <p class="feature-note" data-i18n="features.f2.note">
         Reconoce a cada persona por su número, aunque vuelva a escribir
         semanas o meses después, y retoma donde quedaron.
       </p>
     </div>
 
     <div class="feature">
-      <span class="feature-label">Cierra la venta ahí mismo</span>
-      <h3>Del "cuánto sale" al pago, sin salir del chat</h3>
+      <span class="feature-label" data-i18n="features.f3.label">Cierra la venta ahí mismo</span>
+      <h3 data-i18n="features.f3.title">Del "cuánto sale" al pago, sin salir del chat</h3>
       <div class="mini-thread">
-        <div class="bubble-row in"><div class="bubble in">Buenísimo, cómo pago la seña?</div></div>
-        <div class="bubble-row out"><div class="bubble out">Te paso el link, pagás y queda reservado automático</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f3.msg1">Buenísimo, cómo pago la seña?</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f3.msg2">Te paso el link, pagás y queda reservado automático</div></div>
       </div>
-      <p class="feature-note">
+      <p class="feature-note" data-i18n="features.f3.note">
         Puede generar el link de pago, confirmar solo cuando el pago se
         acredita de verdad, y avisarte a vos cuando entra un pedido — sin que
         tengas que estar mirando el chat todo el día.
@@ -582,15 +642,15 @@
     </div>
 
     <div class="feature">
-      <span class="feature-label">Nunca pisa un turno</span>
-      <h3>Si tenés varias personas atendiendo, revisa la agenda real de cada una</h3>
+      <span class="feature-label" data-i18n="features.f4.label">Nunca pisa un turno</span>
+      <h3 data-i18n="features.f4.title">Si tenés varias personas atendiendo, revisa la agenda real de cada una</h3>
       <div class="mini-thread">
-        <div class="bubble-row in"><div class="bubble in">Quiero turno con Ana para el sábado a las 10</div></div>
-        <div class="bubble-row out"><div class="bubble out">Dejame ver... a las 10 Ana ya tiene otra clienta, pero tiene libre a las 11</div></div>
-        <div class="bubble-row in"><div class="bubble in">Dale, las 11 entonces</div></div>
-        <div class="bubble-row out"><div class="bubble out">Perfecto, quedás con Ana el sábado 11hs</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f4.msg1">Quiero turno con Ana para el sábado a las 10</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f4.msg2">Dejame ver... a las 10 Ana ya tiene otra clienta, pero tiene libre a las 11</div></div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f4.msg3">Dale, las 11 entonces</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f4.msg4">Perfecto, quedás con Ana el sábado 11hs</div></div>
       </div>
-      <p class="feature-note">
+      <p class="feature-note" data-i18n="features.f4.note">
         Antes de confirmar cualquier turno cruza la agenda de verdad — la
         tuya o la de cada profesional por separado si tenés equipo — así que
         nunca promete un horario que ya está ocupado.
@@ -598,14 +658,14 @@
     </div>
 
     <div class="feature">
-      <span class="feature-label">No se pisa con vos</span>
-      <h3>Si le contestás vos mismo, se da cuenta y se queda callado</h3>
+      <span class="feature-label" data-i18n="features.f5.label">No se pisa con vos</span>
+      <h3 data-i18n="features.f5.title">Si le contestás vos mismo, se da cuenta y se queda callado</h3>
       <div class="mini-thread">
-        <div class="bubble-row in"><div class="bubble in">Hola, quería consultar algo puntual antes de reservar</div></div>
-        <div class="bubble-row out"><div class="bubble out">Hola! te contesto yo directamente, dame 2 minutos 🙂</div></div>
-        <div class="system-note">El agente notó que contestaste vos y se puso en pausa</div>
+        <div class="bubble-row in"><div class="bubble in" data-i18n="features.f5.msg1">Hola, quería consultar algo puntual antes de reservar</div></div>
+        <div class="bubble-row out"><div class="bubble out" data-i18n="features.f5.msg2">Hola! te contesto yo directamente, dame 2 minutos 🙂</div></div>
+        <div class="system-note" data-i18n="features.f5.systemNote">El agente notó que contestaste vos y se puso en pausa</div>
       </div>
-      <p class="feature-note">
+      <p class="feature-note" data-i18n="features.f5.note">
         Un cliente puntual, un reclamo, lo que sea — si en algún momento le
         escribís vos desde tu propio celular, el agente lo detecta solo y no
         se cruza con lo que estás diciendo. Retoma automáticamente más tarde,
@@ -615,65 +675,65 @@
   </section>
 
   <section>
-    <div class="divider"><span>Además</span></div>
+    <div class="divider"><span data-i18n="strip.divider">Además</span></div>
     <div class="strip">
       <div class="strip-item">
-        <b>Disponible 24/7</b>
-        <span>Fines de semana, feriados, de madrugada. No tiene horario de cierre.</span>
+        <b data-i18n="strip.i1.title">Disponible 24/7</b>
+        <span data-i18n="strip.i1.text">Fines de semana, feriados, de madrugada. No tiene horario de cierre.</span>
       </div>
       <div class="strip-item">
-        <b>Es tuyo</b>
-        <span>Corre en tu propio número y tu propia base de datos. No depende de una plataforma de terceros.</span>
+        <b data-i18n="strip.i2.title">Es tuyo</b>
+        <span data-i18n="strip.i2.text">Corre en tu propio número y tu propia base de datos. No depende de una plataforma de terceros.</span>
       </div>
       <div class="strip-item">
-        <b>A tu medida</b>
-        <span>Catálogo, precios, tono de voz y forma de cerrar: todo ajustado a cómo vendés vos.</span>
+        <b data-i18n="strip.i3.title">A tu medida</b>
+        <span data-i18n="strip.i3.text">Catálogo, precios, tono de voz y forma de cerrar: todo ajustado a cómo vendés vos.</span>
       </div>
       <div class="strip-item">
-        <b>Te avisa si algo falla</b>
-        <span>Si el agente se queda sin responder, te llega un aviso a vos antes de que lo note un cliente.</span>
+        <b data-i18n="strip.i4.title">Te avisa si algo falla</b>
+        <span data-i18n="strip.i4.text">Si el agente se queda sin responder, te llega un aviso a vos antes de que lo note un cliente.</span>
       </div>
       <div class="strip-item">
-        <b>Entiende varios idiomas</b>
-        <span>Si te escriben en inglés o italiano, responde en el mismo idioma sin que hagas nada.</span>
+        <b data-i18n="strip.i5.title">Entiende varios idiomas</b>
+        <span data-i18n="strip.i5.text">Si te escriben en inglés o italiano, responde en el mismo idioma sin que hagas nada.</span>
       </div>
       <div class="strip-item">
-        <b>Cobra como ya cobrás</b>
-        <span>Mercado Pago, PayPal o Satispay — el que ya uses, sin que el cliente note la diferencia.</span>
+        <b data-i18n="strip.i6.title">Cobra como ya cobrás</b>
+        <span data-i18n="strip.i6.text">Mercado Pago, PayPal o Satispay — el que ya uses, sin que el cliente note la diferencia.</span>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="divider"><span>Cómo se implementa</span></div>
+    <div class="divider"><span data-i18n="steps.divider">Cómo se implementa</span></div>
     <div class="steps">
       <div class="step">
         <span class="step-num">01</span>
         <div>
-          <h4>Contamos tu negocio</h4>
-          <p>Catálogo, precios, tono, forma de cerrar. Una charla, no un formulario.</p>
+          <h4 data-i18n="steps.s1.title">Contamos tu negocio</h4>
+          <p data-i18n="steps.s1.text">Catálogo, precios, tono, forma de cerrar. Una charla, no un formulario.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">02</span>
         <div>
-          <h4>Lo armamos y lo probamos</h4>
-          <p>Se prueba en tu propio WhatsApp antes de salir en vivo con clientes reales.</p>
+          <h4 data-i18n="steps.s2.title">Lo armamos y lo probamos</h4>
+          <p data-i18n="steps.s2.text">Se prueba en tu propio WhatsApp antes de salir en vivo con clientes reales.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">03</span>
         <div>
-          <h4>Empieza a responder solo</h4>
-          <p>Vos seguís con tu negocio. El agente atiende mientras tanto, y vos ves todo desde un panel.</p>
+          <h4 data-i18n="steps.s3.title">Empieza a responder solo</h4>
+          <p data-i18n="steps.s3.text">Vos seguís con tu negocio. El agente atiende mientras tanto, y vos ves todo desde un panel.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="divider"><span>Quiénes somos</span></div>
-    <p class="about-text">
+    <div class="divider"><span data-i18n="about.divider">Quiénes somos</span></div>
+    <p class="about-text" data-i18n="about.text">
       Somos <strong>IAmatic Solutions</strong>, un equipo nuevo enfocado en
       un solo problema: que ningún negocio pierda una venta por no llegar a
       tiempo a un WhatsApp. No vendemos una plataforma genérica — armamos cada
@@ -683,57 +743,57 @@
   </section>
 
   <section>
-    <div class="divider"><span>Preguntas frecuentes</span></div>
+    <div class="divider"><span data-i18n="faq.divider">Preguntas frecuentes</span></div>
 
     <details class="faq-item">
-      <summary>¿Es la API oficial de WhatsApp?</summary>
-      <p>No, es una conexión tipo WhatsApp Web — la misma tecnología que usás cuando escaneás un código QR en la computadora. Funciona perfecto para responder a los clientes que ya te escriben. Para campañas masivas a desconocidos existe otra solución, más cara y con más trámites.</p>
+      <summary data-i18n="faq.q1.q">¿Es la API oficial de WhatsApp?</summary>
+      <p data-i18n="faq.q1.a">No, es una conexión tipo WhatsApp Web — la misma tecnología que usás cuando escaneás un código QR en la computadora. Funciona perfecto para responder a los clientes que ya te escriben. Para campañas masivas a desconocidos existe otra solución, más cara y con más trámites.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Cuánto tarda en estar funcionando?</summary>
-      <p>Depende de cuánto catálogo y detalle tenga tu negocio, pero lo habitual son pocos días desde que me contás todo hasta que está respondiendo en tu WhatsApp real.</p>
+      <summary data-i18n="faq.q2.q">¿Cuánto tarda en estar funcionando?</summary>
+      <p data-i18n="faq.q2.a">Depende de cuánto catálogo y detalle tenga tu negocio, pero lo habitual son pocos días desde que me contás todo hasta que está respondiendo en tu WhatsApp real.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Qué pasa si cambio mis precios?</summary>
-      <p>Se actualiza cuando quieras. El agente solo puede decir los precios que estén cargados, así que si subís una tarifa, me avisás y se actualiza — no hay riesgo de que siga cotizando con el precio viejo.</p>
+      <summary data-i18n="faq.q3.q">¿Qué pasa si cambio mis precios?</summary>
+      <p data-i18n="faq.q3.a">Se actualiza cuando quieras. El agente solo puede decir los precios que estén cargados, así que si subís una tarifa, me avisás y se actualiza — no hay riesgo de que siga cotizando con el precio viejo.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Puede llegar a inventar algo o decir cualquier cosa?</summary>
-      <p>Tiene un filtro que bloquea el mensaje entero si intenta decir un precio o un enlace que no le diste vos. No es magia perfecta, pero está pensado justo para evitar el problema más común de los bots con IA: que prometan algo que el negocio no puede cumplir.</p>
+      <summary data-i18n="faq.q4.q">¿Puede llegar a inventar algo o decir cualquier cosa?</summary>
+      <p data-i18n="faq.q4.a">Tiene un filtro que bloquea el mensaje entero si intenta decir un precio o un enlace que no le diste vos. No es magia perfecta, pero está pensado justo para evitar el problema más común de los bots con IA: que prometan algo que el negocio no puede cumplir.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Tengo que saber de tecnología?</summary>
-      <p>No. Vos me contás tu negocio, yo lo armo y lo dejo funcionando. Del día a día no tenés que tocar nada — podés ver las conversaciones desde un panel simple si querés, pero no es obligatorio.</p>
+      <summary data-i18n="faq.q5.q">¿Tengo que saber de tecnología?</summary>
+      <p data-i18n="faq.q5.a">No. Vos me contás tu negocio, yo lo armo y lo dejo funcionando. Del día a día no tenés que tocar nada — podés ver las conversaciones desde un panel simple si querés, pero no es obligatorio.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Qué pasa con los datos de mis clientes?</summary>
-      <p>Quedan en una base de datos propia de tu negocio, no en una plataforma externa compartida con otros usuarios. Sos dueño de esa información.</p>
+      <summary data-i18n="faq.q6.q">¿Qué pasa con los datos de mis clientes?</summary>
+      <p data-i18n="faq.q6.a">Quedan en una base de datos propia de tu negocio, no en una plataforma externa compartida con otros usuarios. Sos dueño de esa información.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Y si tengo más de una persona atendiendo turnos?</summary>
-      <p>El agente maneja varias personas a la vez: el cliente elige (o vos definís) quién lo atiende, y cada una tiene su propia agenda con sus propios horarios — nunca se pisan los turnos entre sí, aunque dos clientas reserven al mismo tiempo con profesionales distintas.</p>
+      <summary data-i18n="faq.q7.q">¿Y si tengo más de una persona atendiendo turnos?</summary>
+      <p data-i18n="faq.q7.a">El agente maneja varias personas a la vez: el cliente elige (o vos definís) quién lo atiende, y cada una tiene su propia agenda con sus propios horarios — nunca se pisan los turnos entre sí, aunque dos clientas reserven al mismo tiempo con profesionales distintas.</p>
     </details>
 
     <details class="faq-item">
-      <summary>¿Puedo meterme yo en una conversación puntual?</summary>
-      <p>Sí, cuando quieras — le contestás al cliente directamente desde tu propio WhatsApp y el agente se da cuenta solo: se queda en silencio esa conversación puntual y retoma automáticamente más tarde. No hace falta avisarle ni tocar ningún panel.</p>
+      <summary data-i18n="faq.q8.q">¿Puedo meterme yo en una conversación puntual?</summary>
+      <p data-i18n="faq.q8.a">Sí, cuando quieras — le contestás al cliente directamente desde tu propio WhatsApp y el agente se da cuenta solo: se queda en silencio esa conversación puntual y retoma automáticamente más tarde. No hace falta avisarle ni tocar ningún panel.</p>
     </details>
   </section>
 
   <section class="cta">
-    <div class="divider"><span>Hablemos</span></div>
-    <h2>¿Charlamos de tu negocio?</h2>
-    <p class="lede">Contame qué vendés y te muestro cómo se vería tu propio agente.</p>
+    <div class="divider"><span data-i18n="cta.divider">Hablemos</span></div>
+    <h2 data-i18n="cta.title">¿Charlamos de tu negocio?</h2>
+    <p class="lede" data-i18n="cta.lede">Contame qué vendés y te muestro cómo se vería tu propio agente.</p>
 
-    <a class="cta-link" href="https://wa.me/5491135841243" aria-label="Escribir por WhatsApp">
+    <a class="cta-link" href="https://wa.me/5491135841243" data-i18n-aria="cta.ariaLabel" aria-label="Escribir por WhatsApp">
       <div class="input-bar">
-        <span class="input-bar-label">Escribir por WhatsApp</span>
+        <span class="input-bar-label" data-i18n="cta.inputLabel">Escribir por WhatsApp</span>
         <span class="send-btn" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#0a0e17" stroke="#0a0e17" stroke-width="1.4" stroke-linejoin="round"/>
@@ -741,12 +801,12 @@
         </span>
       </div>
     </a>
-    <p class="guarantee">Sin permanencia forzosa — cancelás el mantenimiento cuando quieras.</p>
+    <p class="guarantee" data-i18n="cta.guarantee">Sin permanencia forzosa — cancelás el mantenimiento cuando quieras.</p>
   </section>
 
   <footer>
     <p class="tagline">IAmatic Solutions</p>
-    <p>Agentes de WhatsApp con inteligencia artificial, armados a medida para cada negocio — sin plantillas genéricas, sin plataformas compartidas.</p>
+    <p data-i18n="footer.text">Agentes de WhatsApp con inteligencia artificial, armados a medida para cada negocio — sin plantillas genéricas, sin plataformas compartidas.</p>
   </footer>
 
 </div>
@@ -765,6 +825,266 @@
       }
     });
   });
+
+  var I18N = {
+    es: {
+      meta: {
+        title: "Mientras dormís, tu WhatsApp sigue vendiendo",
+        description: "Un agente con inteligencia artificial que responde, cotiza y cierra ventas por WhatsApp las 24 horas — armado a medida para tu negocio, sin plataformas compartidas."
+      },
+      hero: {
+        time: "23:47 · un cliente te está escribiendo",
+        title: "Mientras dormís,<br>tu WhatsApp puede<br>seguir vendiendo.",
+        lede: "Un agente con inteligencia artificial que responde, cotiza y cierra por vos — las 24 horas, sonando como una persona, no como un bot de menú.",
+        phoneAria: "Conversación de ejemplo: un cliente pide turno a la noche y el agente responde al instante",
+        stamp: "HOY 23:47",
+        msg1: "Holaa disculpen la hora, el sábado a las 10 tienen lugar?",
+        msg2: "Hola! Sí, el sábado 10hs está libre",
+        msg3: "Te reservo el turno?",
+        msg4: "Dale, soy Caro",
+        msg5: "Buenísimo Caro, quedás anotada para el sábado a las 10",
+        typingAria: "escribiendo"
+      },
+      pain: {
+        divider: "Lo que pasa hoy, sin agente",
+        tag: "A las 9 de la noche",
+        text: "Te escriben tres personas. Le contestás a una, la segunda se cansa de esperar y le escribe a la competencia, la tercera se olvida directamente. <strong>Cada mensaje sin respuesta a tiempo es una venta que ni te enteraste que perdiste.</strong>"
+      },
+      features: {
+        divider: "Cómo responde de verdad",
+        f1: { label: "No inventa precios", title: "Dice solo lo que vos autorizaste", msg1: "Cuánto sale el tratamiento completo?", msg2: "El tratamiento completo son $45.000, en 3 sesiones", note: "Tiene un límite de seguridad: si en algún momento intenta decir un precio o mandar un enlace que vos no aprobaste, el sistema bloquea ese mensaje antes de que le llegue al cliente." },
+        f2: { label: "Se acuerda de quién le escribe", title: "No arranca de cero cada vez", msg1: "Hola, te escribí hace como un mes, no sé si te dije mi nombre", msg2: "Hola de nuevo! Sos Fernando, habíamos hablado del plan mensual", note: "Reconoce a cada persona por su número, aunque vuelva a escribir semanas o meses después, y retoma donde quedaron." },
+        f3: { label: "Cierra la venta ahí mismo", title: "Del \"cuánto sale\" al pago, sin salir del chat", msg1: "Buenísimo, cómo pago la seña?", msg2: "Te paso el link, pagás y queda reservado automático", note: "Puede generar el link de pago, confirmar solo cuando el pago se acredita de verdad, y avisarte a vos cuando entra un pedido — sin que tengas que estar mirando el chat todo el día." },
+        f4: { label: "Nunca pisa un turno", title: "Si tenés varias personas atendiendo, revisa la agenda real de cada una", msg1: "Quiero turno con Ana para el sábado a las 10", msg2: "Dejame ver... a las 10 Ana ya tiene otra clienta, pero tiene libre a las 11", msg3: "Dale, las 11 entonces", msg4: "Perfecto, quedás con Ana el sábado 11hs", note: "Antes de confirmar cualquier turno cruza la agenda de verdad — la tuya o la de cada profesional por separado si tenés equipo — así que nunca promete un horario que ya está ocupado." },
+        f5: { label: "No se pisa con vos", title: "Si le contestás vos mismo, se da cuenta y se queda callado", msg1: "Hola, quería consultar algo puntual antes de reservar", msg2: "Hola! te contesto yo directamente, dame 2 minutos 🙂", systemNote: "El agente notó que contestaste vos y se puso en pausa", note: "Un cliente puntual, un reclamo, lo que sea — si en algún momento le escribís vos desde tu propio celular, el agente lo detecta solo y no se cruza con lo que estás diciendo. Retoma automáticamente más tarde, sin que tengas que avisarle ni tocar ningún panel." }
+      },
+      strip: {
+        divider: "Además",
+        i1: { title: "Disponible 24/7", text: "Fines de semana, feriados, de madrugada. No tiene horario de cierre." },
+        i2: { title: "Es tuyo", text: "Corre en tu propio número y tu propia base de datos. No depende de una plataforma de terceros." },
+        i3: { title: "A tu medida", text: "Catálogo, precios, tono de voz y forma de cerrar: todo ajustado a cómo vendés vos." },
+        i4: { title: "Te avisa si algo falla", text: "Si el agente se queda sin responder, te llega un aviso a vos antes de que lo note un cliente." },
+        i5: { title: "Entiende varios idiomas", text: "Si te escriben en inglés o italiano, responde en el mismo idioma sin que hagas nada." },
+        i6: { title: "Cobra como ya cobrás", text: "Mercado Pago, PayPal o Satispay — el que ya uses, sin que el cliente note la diferencia." }
+      },
+      steps: {
+        divider: "Cómo se implementa",
+        s1: { title: "Contamos tu negocio", text: "Catálogo, precios, tono, forma de cerrar. Una charla, no un formulario." },
+        s2: { title: "Lo armamos y lo probamos", text: "Se prueba en tu propio WhatsApp antes de salir en vivo con clientes reales." },
+        s3: { title: "Empieza a responder solo", text: "Vos seguís con tu negocio. El agente atiende mientras tanto, y vos ves todo desde un panel." }
+      },
+      about: {
+        divider: "Quiénes somos",
+        text: "Somos <strong>IAmatic Solutions</strong>, un equipo nuevo enfocado en un solo problema: que ningún negocio pierda una venta por no llegar a tiempo a un WhatsApp. No vendemos una plataforma genérica — armamos cada agente a medida, negocio por negocio, y lo probamos en tu propio WhatsApp antes de que hable con un cliente real."
+      },
+      faq: {
+        divider: "Preguntas frecuentes",
+        q1: { q: "¿Es la API oficial de WhatsApp?", a: "No, es una conexión tipo WhatsApp Web — la misma tecnología que usás cuando escaneás un código QR en la computadora. Funciona perfecto para responder a los clientes que ya te escriben. Para campañas masivas a desconocidos existe otra solución, más cara y con más trámites." },
+        q2: { q: "¿Cuánto tarda en estar funcionando?", a: "Depende de cuánto catálogo y detalle tenga tu negocio, pero lo habitual son pocos días desde que me contás todo hasta que está respondiendo en tu WhatsApp real." },
+        q3: { q: "¿Qué pasa si cambio mis precios?", a: "Se actualiza cuando quieras. El agente solo puede decir los precios que estén cargados, así que si subís una tarifa, me avisás y se actualiza — no hay riesgo de que siga cotizando con el precio viejo." },
+        q4: { q: "¿Puede llegar a inventar algo o decir cualquier cosa?", a: "Tiene un filtro que bloquea el mensaje entero si intenta decir un precio o un enlace que no le diste vos. No es magia perfecta, pero está pensado justo para evitar el problema más común de los bots con IA: que prometan algo que el negocio no puede cumplir." },
+        q5: { q: "¿Tengo que saber de tecnología?", a: "No. Vos me contás tu negocio, yo lo armo y lo dejo funcionando. Del día a día no tenés que tocar nada — podés ver las conversaciones desde un panel simple si querés, pero no es obligatorio." },
+        q6: { q: "¿Qué pasa con los datos de mis clientes?", a: "Quedan en una base de datos propia de tu negocio, no en una plataforma externa compartida con otros usuarios. Sos dueño de esa información." },
+        q7: { q: "¿Y si tengo más de una persona atendiendo turnos?", a: "El agente maneja varias personas a la vez: el cliente elige (o vos definís) quién lo atiende, y cada una tiene su propia agenda con sus propios horarios — nunca se pisan los turnos entre sí, aunque dos clientas reserven al mismo tiempo con profesionales distintas." },
+        q8: { q: "¿Puedo meterme yo en una conversación puntual?", a: "Sí, cuando quieras — le contestás al cliente directamente desde tu propio WhatsApp y el agente se da cuenta solo: se queda en silencio esa conversación puntual y retoma automáticamente más tarde. No hace falta avisarle ni tocar ningún panel." }
+      },
+      cta: {
+        divider: "Hablemos",
+        title: "¿Charlamos de tu negocio?",
+        lede: "Contame qué vendés y te muestro cómo se vería tu propio agente.",
+        ariaLabel: "Escribir por WhatsApp",
+        inputLabel: "Escribir por WhatsApp",
+        guarantee: "Sin permanencia forzosa — cancelás el mantenimiento cuando quieras."
+      },
+      footer: {
+        text: "Agentes de WhatsApp con inteligencia artificial, armados a medida para cada negocio — sin plantillas genéricas, sin plataformas compartidas."
+      }
+    },
+    en: {
+      meta: {
+        title: "While you sleep, your WhatsApp keeps selling",
+        description: "An AI agent that answers, quotes, and closes sales on WhatsApp around the clock — built specifically for your business, with no shared platforms."
+      },
+      hero: {
+        time: "11:47 PM · a customer is texting you right now",
+        title: "While you sleep,<br>your WhatsApp can<br>keep on selling.",
+        lede: "An AI agent that answers, quotes, and closes deals for you — 24 hours a day, sounding like a real person, not a menu-driven bot.",
+        phoneAria: "Example conversation: a customer requests an appointment at night and the agent replies instantly",
+        stamp: "TODAY 11:47 PM",
+        msg1: "Hii sorry for the late hour, do you have room Saturday at 10?",
+        msg2: "Hi! Yes, Saturday at 10 is open",
+        msg3: "Want me to book it for you?",
+        msg4: "Sure, I'm Caro",
+        msg5: "Great Caro, you're booked for Saturday at 10",
+        typingAria: "typing"
+      },
+      pain: {
+        divider: "What happens today, without an agent",
+        tag: "At 9pm",
+        text: "Three people message you. You answer one, the second gets tired of waiting and messages a competitor, the third just forgets about it. <strong>Every message you don't answer in time is a sale you didn't even know you lost.</strong>"
+      },
+      features: {
+        divider: "How it actually responds",
+        f1: { label: "It never makes up prices", title: "It only says what you approved", msg1: "How much is the full treatment?", msg2: "The full treatment is $45,000, over 3 sessions", note: "It has a built-in safety limit: if it ever tries to quote a price or send a link you didn't approve, the system blocks that message before it reaches the customer." },
+        f2: { label: "It remembers who's writing to it", title: "It never starts from zero", msg1: "Hi, I messaged about a month ago, not sure I told you my name", msg2: "Hey, welcome back! You're Fernando, we talked about the monthly plan", note: "It recognizes each person by their number, even if they write back weeks or months later, and picks up right where you left off." },
+        f3: { label: "It closes the sale right there", title: "From \"how much is it\" to payment, without leaving the chat", msg1: "Great, how do I pay the deposit?", msg2: "I'll send you the link, you pay and it's booked automatically", note: "It can generate the payment link, confirm only once the payment is actually received, and notify you the moment an order comes in — without you having to watch the chat all day." },
+        f4: { label: "It never double-books a slot", title: "If you've got several people on staff, it checks each one's real schedule", msg1: "I'd like an appointment with Ana on Saturday at 10", msg2: "Let me check... Ana already has someone at 10, but she's free at 11", msg3: "Sure, 11 then", msg4: "Perfect, you're set with Ana Saturday at 11", note: "Before confirming any appointment, it checks the real schedule — yours, or each staff member's separately if you've got a team — so it never promises a slot that's already taken." },
+        f5: { label: "It never steps on your toes", title: "If you answer yourself, it notices and stays quiet", msg1: "Hi, I wanted to ask something specific before booking", msg2: "Hi! I'll answer this one myself, give me 2 minutes 🙂", systemNote: "The agent noticed you replied and paused itself", note: "A specific customer, a complaint, whatever it is — if you ever message from your own phone, the agent detects it on its own and won't talk over you. It picks back up automatically later, with no need to notify it or touch any panel." }
+      },
+      strip: {
+        divider: "Also",
+        i1: { title: "Available 24/7", text: "Weekends, holidays, the middle of the night. It never closes." },
+        i2: { title: "It's yours", text: "It runs on your own number and your own database. It doesn't depend on a third-party platform." },
+        i3: { title: "Built to your fit", text: "Catalog, prices, tone of voice, and closing style — all tuned to how you actually sell." },
+        i4: { title: "It tells you if something breaks", text: "If the agent stops responding, you get an alert before any customer even notices." },
+        i5: { title: "It understands several languages", text: "If someone writes in English or Italian, it replies in that same language automatically." },
+        i6: { title: "It charges the way you already do", text: "Mercado Pago, PayPal, or Satispay — whichever you already use, with no difference the customer would notice." }
+      },
+      steps: {
+        divider: "How it gets set up",
+        s1: { title: "We talk about your business", text: "Catalog, prices, tone, how you close. A conversation, not a form." },
+        s2: { title: "We build it and test it", text: "It's tested on your own WhatsApp before going live with real customers." },
+        s3: { title: "It starts answering on its own", text: "You keep running your business. The agent handles it meanwhile, and you see everything from a dashboard." }
+      },
+      about: {
+        divider: "Who we are",
+        text: "We're <strong>IAmatic Solutions</strong>, a new team focused on a single problem: no business should lose a sale by not answering WhatsApp in time. We don't sell a generic platform — we build every agent to measure, business by business, and test it on your own WhatsApp before it ever talks to a real customer."
+      },
+      faq: {
+        divider: "Frequently asked questions",
+        q1: { q: "Is this the official WhatsApp API?", a: "No, it's a WhatsApp Web–style connection — the same technology you use when you scan a QR code on your computer. It works perfectly for answering customers who already message you. For mass campaigns to strangers, there's a different solution, more expensive and with more paperwork." },
+        q2: { q: "How long until it's up and running?", a: "It depends on how much catalog and detail your business has, but it's usually just a few days from telling me everything to it responding on your real WhatsApp." },
+        q3: { q: "What happens if I change my prices?", a: "It gets updated whenever you want. The agent can only quote prices that are loaded in, so if you raise a rate, just let me know and it gets updated — no risk of it still quoting the old price." },
+        q4: { q: "Could it end up making something up or saying anything at all?", a: "It has a filter that blocks the entire message if it tries to state a price or link you didn't give it. It's not perfect magic, but it's designed specifically to avoid the most common problem with AI bots: promising something the business can't deliver." },
+        q5: { q: "Do I need to know about technology?", a: "No. You tell me about your business, I build it and get it running. Day to day, you don't have to touch anything — you can view the conversations from a simple dashboard if you want, but it's not required." },
+        q6: { q: "What happens to my customers' data?", a: "It stays in a database that belongs to your business, not on an external platform shared with other users. You own that information." },
+        q7: { q: "What if I have more than one person taking appointments?", a: "The agent handles several staff members at once: the customer chooses (or you decide) who serves them, and each one has their own schedule with their own hours — appointments never overlap with each other, even if two customers book at the same time with different staff." },
+        q8: { q: "Can I jump into a specific conversation myself?", a: "Yes, whenever you want — you reply to the customer directly from your own WhatsApp and the agent figures it out on its own: it goes quiet on that specific conversation and picks back up automatically later. No need to notify it or touch any panel." }
+      },
+      cta: {
+        divider: "Let's talk",
+        title: "Want to talk about your business?",
+        lede: "Tell me what you sell and I'll show you what your own agent would look like.",
+        ariaLabel: "Message on WhatsApp",
+        inputLabel: "Message on WhatsApp",
+        guarantee: "No forced commitment — cancel the maintenance whenever you want."
+      },
+      footer: {
+        text: "AI-powered WhatsApp agents, built to measure for every business — no generic templates, no shared platforms."
+      }
+    },
+    it: {
+      meta: {
+        title: "Mentre dormi, il tuo WhatsApp continua a vendere",
+        description: "Un agente con intelligenza artificiale che risponde, preventiva e chiude vendite su WhatsApp 24 ore su 24 — costruito su misura per la tua attività, senza piattaforme condivise."
+      },
+      hero: {
+        time: "23:47 · un cliente ti sta scrivendo",
+        title: "Mentre dormi,<br>il tuo WhatsApp può<br>continuare a vendere.",
+        lede: "Un agente con intelligenza artificiale che risponde, preventiva e chiude per te — 24 ore su 24, con un tono naturale, non come un bot a menu.",
+        phoneAria: "Esempio di conversazione: un cliente chiede un appuntamento di notte e l'agente risponde all'istante",
+        stamp: "OGGI 23:47",
+        msg1: "Ciao scusate l'orario, sabato alle 10 avete posto?",
+        msg2: "Ciao! Sì, sabato alle 10 è libero",
+        msg3: "Ti prenoto il posto?",
+        msg4: "Va bene, sono Caro",
+        msg5: "Perfetto Caro, sei prenotata per sabato alle 10",
+        typingAria: "sta scrivendo"
+      },
+      pain: {
+        divider: "Quello che succede oggi, senza agente",
+        tag: "Alle 9 di sera",
+        text: "Ti scrivono tre persone. Rispondi a una, la seconda si stanca di aspettare e scrive alla concorrenza, la terza si dimentica direttamente. <strong>Ogni messaggio senza risposta in tempo è una vendita che non sai nemmeno di aver perso.</strong>"
+      },
+      features: {
+        divider: "Come risponde davvero",
+        f1: { label: "Non inventa prezzi", title: "Dice solo quello che hai autorizzato", msg1: "Quanto costa il trattamento completo?", msg2: "Il trattamento completo è di $45.000, in 3 sedute", note: "Ha un limite di sicurezza: se in qualche momento prova a dire un prezzo o mandare un link che non hai approvato, il sistema blocca quel messaggio prima che arrivi al cliente." },
+        f2: { label: "Si ricorda di chi gli scrive", title: "Non riparte mai da zero", msg1: "Ciao, ti ho scritto circa un mese fa, non so se ti ho detto il mio nome", msg2: "Ciao di nuovo! Sei Fernando, avevamo parlato del piano mensile", note: "Riconosce ogni persona dal suo numero, anche se torna a scrivere settimane o mesi dopo, e riprende da dove eravate rimasti." },
+        f3: { label: "Chiude la vendita sul momento", title: "Dal \"quanto costa\" al pagamento, senza uscire dalla chat", msg1: "Perfetto, come pago l'acconto?", msg2: "Ti mando il link, paghi e viene prenotato in automatico", note: "Può generare il link di pagamento, confermare solo quando il pagamento viene davvero accreditato, e avvisarti quando arriva un ordine — senza che tu debba guardare la chat tutto il giorno." },
+        f4: { label: "Non sovrappone mai un appuntamento", title: "Se hai più persone che lavorano, controlla l'agenda reale di ciascuna", msg1: "Vorrei un appuntamento con Ana per sabato alle 10", msg2: "Fammi controllare... alle 10 Ana ha già un'altra cliente, ma è libera alle 11", msg3: "Va bene, alle 11 allora", msg4: "Perfetto, sei prenotata con Ana sabato alle 11", note: "Prima di confermare qualsiasi appuntamento controlla l'agenda vera — la tua o quella di ogni professionista separatamente se hai un team — quindi non promette mai un orario già occupato." },
+        f5: { label: "Non si sovrappone a te", title: "Se rispondi tu stesso, se ne accorge e resta in silenzio", msg1: "Ciao, volevo chiedere una cosa specifica prima di prenotare", msg2: "Ciao! ti rispondo io direttamente, dammi 2 minuti 🙂", systemNote: "L'agente ha notato che hai risposto tu e si è messo in pausa", note: "Un cliente particolare, un reclamo, qualsiasi cosa — se in qualsiasi momento scrivi tu dal tuo cellulare, l'agente lo rileva da solo e non si sovrappone a quello che stai dicendo. Riprende automaticamente più tardi, senza bisogno di avvisarlo né toccare nessun pannello." }
+      },
+      strip: {
+        divider: "Inoltre",
+        i1: { title: "Disponibile 24/7", text: "Weekend, festivi, di notte. Non ha un orario di chiusura." },
+        i2: { title: "È tuo", text: "Funziona sul tuo numero e sul tuo database. Non dipende da nessuna piattaforma di terzi." },
+        i3: { title: "Su misura per te", text: "Catalogo, prezzi, tono di voce e modo di chiudere: tutto adattato a come vendi tu." },
+        i4: { title: "Ti avvisa se qualcosa non va", text: "Se l'agente smette di rispondere, ricevi un avviso prima che se ne accorga un cliente." },
+        i5: { title: "Capisce più lingue", text: "Se ti scrivono in inglese o italiano, risponde nella stessa lingua senza che tu faccia nulla." },
+        i6: { title: "Incassa come fai già", text: "Mercado Pago, PayPal o Satispay — quello che usi già, senza che il cliente noti la differenza." }
+      },
+      steps: {
+        divider: "Come viene implementato",
+        s1: { title: "Ci racconti il tuo business", text: "Catalogo, prezzi, tono, modo di chiudere. Una chiacchierata, non un modulo." },
+        s2: { title: "Lo costruiamo e lo testiamo", text: "Viene testato sul tuo WhatsApp prima di andare live con clienti reali." },
+        s3: { title: "Comincia a rispondere da solo", text: "Tu continui con il tuo business. L'agente risponde nel frattempo, e tu vedi tutto da un pannello." }
+      },
+      about: {
+        divider: "Chi siamo",
+        text: "Siamo <strong>IAmatic Solutions</strong>, un team nuovo concentrato su un solo problema: che nessuna attività perda una vendita per non rispondere in tempo su WhatsApp. Non vendiamo una piattaforma generica — costruiamo ogni agente su misura, attività per attività, e lo testiamo sul tuo WhatsApp prima che parli con un cliente vero."
+      },
+      faq: {
+        divider: "Domande frequenti",
+        q1: { q: "È l'API ufficiale di WhatsApp?", a: "No, è una connessione tipo WhatsApp Web — la stessa tecnologia che usi quando scansioni un codice QR sul computer. Funziona perfettamente per rispondere ai clienti che già ti scrivono. Per campagne di massa verso sconosciuti esiste un'altra soluzione, più cara e con più burocrazia." },
+        q2: { q: "Quanto tempo serve per averlo funzionante?", a: "Dipende da quanto catalogo e dettaglio ha la tua attività, ma di solito bastano pochi giorni da quando mi racconti tutto a quando risponde sul tuo WhatsApp reale." },
+        q3: { q: "Cosa succede se cambio i miei prezzi?", a: "Si aggiorna quando vuoi. L'agente può dire solo i prezzi caricati, quindi se aumenti una tariffa, me lo dici e si aggiorna — nessun rischio che continui a citare il prezzo vecchio." },
+        q4: { q: "Può inventarsi qualcosa o dire qualsiasi cosa?", a: "Ha un filtro che blocca l'intero messaggio se prova a dire un prezzo o un link che non gli hai dato tu. Non è magia perfetta, ma è pensato apposta per evitare il problema più comune dei bot con IA: promettere qualcosa che l'attività non può mantenere." },
+        q5: { q: "Devo sapere di tecnologia?", a: "No. Tu mi racconti la tua attività, io lo costruisco e lo lascio funzionante. Nel giorno per giorno non devi toccare nulla — puoi vedere le conversazioni da un pannello semplice se vuoi, ma non è obbligatorio." },
+        q6: { q: "Cosa succede ai dati dei miei clienti?", a: "Restano in un database di proprietà della tua attività, non su una piattaforma esterna condivisa con altri utenti. Sei tu il proprietario di quell'informazione." },
+        q7: { q: "E se ho più di una persona che prende appuntamenti?", a: "L'agente gestisce più persone contemporaneamente: il cliente sceglie (o decidi tu) chi lo segue, e ognuna ha la propria agenda con i propri orari — gli appuntamenti non si sovrappongono mai tra loro, anche se due clienti prenotano nello stesso momento con professioniste diverse." },
+        q8: { q: "Posso intervenire io in una conversazione specifica?", a: "Sì, quando vuoi — rispondi al cliente direttamente dal tuo WhatsApp e l'agente se ne accorge da solo: resta in silenzio in quella conversazione specifica e riprende automaticamente più tardi. Non serve avvisarlo né toccare nessun pannello." }
+      },
+      cta: {
+        divider: "Parliamone",
+        title: "Parliamo della tua attività?",
+        lede: "Raccontami cosa vendi e ti mostro come sarebbe il tuo agente.",
+        ariaLabel: "Scrivi su WhatsApp",
+        inputLabel: "Scrivi su WhatsApp",
+        guarantee: "Nessun vincolo obbligatorio — annulli la manutenzione quando vuoi."
+      },
+      footer: {
+        text: "Agenti di WhatsApp con intelligenza artificiale, costruiti su misura per ogni attività — senza modelli generici, senza piattaforme condivise."
+      }
+    }
+  };
+
+  function applyLang(lang) {
+    var dict = I18N[lang] || I18N.es;
+    document.documentElement.lang = lang;
+    document.title = dict.meta.title;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', dict.meta.description);
+
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      var val = key.split('.').reduce(function (o, k) { return o ? o[k] : undefined; }, dict);
+      if (typeof val === 'string') el.innerHTML = val;
+    });
+
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-aria');
+      var val = key.split('.').reduce(function (o, k) { return o ? o[k] : undefined; }, dict);
+      if (typeof val === 'string') el.setAttribute('aria-label', val);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = btn.getAttribute('data-lang');
+      applyLang(lang);
+      gtag('event', 'change_language', { language: lang });
+    });
+  });
+
+  var initialLang = 'es';
+  try { initialLang = localStorage.getItem('lang') || 'es'; } catch (e) {}
+  applyLang(initialLang);
 </script>
 
 </body>
