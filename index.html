@@ -357,6 +357,152 @@
     line-height: 1.5;
   }
 
+  /* ---------- pricing plans ---------- */
+  .plans-band {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  .plans-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+  }
+  .plans-glow {
+    position: absolute;
+    inset: -60px -20px auto -20px;
+    height: 460px;
+    background: radial-gradient(ellipse 50% 100% at 50% 8%, rgba(47, 190, 143, 0.28), transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .plans {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .plan-card {
+    position: relative;
+    border: 1px solid var(--ink-line);
+    background: var(--ink-raised);
+    border-radius: 10px;
+    padding: 28px 22px 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .plan-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--signal-dim);
+    box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.65);
+  }
+  .plan-card:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+  .plan-card.selected {
+    border-color: var(--signal);
+    background: linear-gradient(180deg, rgba(47, 190, 143, 0.12), var(--ink-raised) 58%);
+    box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.65), 0 0 44px -6px rgba(47, 190, 143, 0.45);
+    transform: translateY(-8px);
+  }
+  .plan-card.selected:hover { transform: translateY(-11px); }
+  .plan-card.selected .plan-name { color: var(--signal); }
+  @media (prefers-reduced-motion: reduce) {
+    .plan-card, .plan-card:hover, .plan-card.selected, .plan-card.selected:hover {
+      transition: none; transform: none;
+    }
+  }
+  @media (max-width: 860px) {
+    .plans { grid-template-columns: 1fr; gap: 16px; }
+  }
+  .plan-dot {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-line);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .plan-card.selected .plan-dot {
+    background: var(--signal);
+    box-shadow: 0 0 12px rgba(47, 190, 143, 0.7);
+  }
+  .signal-bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    margin-bottom: 12px;
+  }
+  .signal-bars i {
+    display: block;
+    width: 5px;
+    border-radius: 1.5px;
+    background: var(--ink-line);
+  }
+  .signal-bars i:nth-child(1) { height: 8px; }
+  .signal-bars i:nth-child(2) { height: 14px; }
+  .signal-bars i:nth-child(3) { height: 20px; }
+  .signal-bars.level-1 i:nth-child(1) { background: var(--signal); }
+  .signal-bars.level-2 i:nth-child(1),
+  .signal-bars.level-2 i:nth-child(2) { background: var(--signal); }
+  .signal-bars.level-3 i { background: var(--signal); }
+  .plan-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--paper);
+    margin: 0 0 8px;
+  }
+  .plan-pitch {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0 0 20px;
+    max-width: 44ch;
+  }
+  .plan-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .plan-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .plan-feature .dot {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    background: var(--signal);
+    margin-top: 8px;
+  }
+  .plan-feature span:last-child {
+    color: var(--paper);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .plan-feature.inherit .dot { background: var(--ink-line); }
+  .plan-feature.inherit span:last-child { color: var(--muted); font-style: italic; }
+  .plan-hint {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--signal);
+  }
+
   /* ---------- CTA ---------- */
   .cta { text-align: center; }
   .cta h2 { text-align: center; }
@@ -732,6 +878,55 @@
   </section>
 
   <section>
+    <div class="divider"><span data-i18n="plans.divider">Planes y precios</span></div>
+
+    <div class="plans-band">
+    <div class="plans-inner">
+      <div class="plans-glow"></div>
+      <div class="plans">
+        <div class="plan-card" tabindex="0" role="button" aria-pressed="false" data-plan-key="p1">
+          <div class="plan-dot" aria-hidden="true"></div>
+          <div class="signal-bars level-1"><i></i><i></i><i></i></div>
+          <h3 class="plan-name" data-i18n="plans.p1.name">Plan Inicial</h3>
+          <p class="plan-pitch" data-i18n="plans.p1.pitch">Para arrancar ya: tu agente queda respondiendo desde el primer día, con todo lo importante ya incluido.</p>
+          <div class="plan-features">
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f1">Se acuerda de cada persona que le escribió antes</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f2">Entiende y responde en español, inglés o italiano</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f3">Nunca inventa un precio ni un link que vos no le diste</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f4">Te avisa apenas deja de responder</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f5">Cobra una seña para reservar turnos, o arma pedidos con carrito — el que necesites</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f6">Sabe tu catálogo y tus precios de memoria</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p1.f7">Le podés preguntar cómo viene el negocio, como a una persona</span></div>
+          </div>
+        </div>
+
+        <div class="plan-card" tabindex="0" role="button" aria-pressed="false" data-plan-key="p2">
+          <div class="plan-dot" aria-hidden="true"></div>
+          <div class="signal-bars level-2"><i></i><i></i><i></i></div>
+          <h3 class="plan-name" data-i18n="plans.p2.name">Plan Intermedio</h3>
+          <p class="plan-pitch" data-i18n="plans.p2.pitch">Para cuando ya tenés movimiento y no querés perder ni un mensaje: que te escriban donde te escriban, y que cobre solo.</p>
+          <div class="plan-features">
+            <div class="plan-feature inherit"><span class="dot"></span><span data-i18n="plans.p2.inherit">Todo lo del Plan Inicial</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p2.f1">Contesta también en Instagram y en Messenger, como si fuera la misma persona</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p2.f2">Responde las preguntas que te dejan en tus publicaciones de Mercado Libre</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p2.f3">Muestra tu catálogo actualizado, directo desde Tiendanube</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p2.f4">Cobra ahí mismo en la charla, al momento o de forma diferida, y le recuerda a quien no terminó de pagar</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p2.f5">Te genera la factura sola, si la necesitás (Argentina)</span></div>
+          </div>
+        </div>
+
+        <div class="plan-card" tabindex="0" role="button" aria-pressed="false" data-plan-key="p3">
+          <div class="plan-dot" aria-hidden="true"></div>
+          <div class="signal-bars level-3"><i></i><i></i><i></i></div>
+          <h3 class="plan-name" data-i18n="plans.p3.name">Plan Personalizado</h3>
+          <p class="plan-pitch" data-i18n="plans.p3.pitch">Si tu negocio necesita algo puntual — vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista — te lo armamos a tu medida.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section>
     <div class="divider"><span data-i18n="about.divider">Quiénes somos</span></div>
     <p class="about-text" data-i18n="about.text">
       Somos <strong>IAmatic Solutions</strong>, un equipo nuevo enfocado en
@@ -791,9 +986,9 @@
     <h2 data-i18n="cta.title">¿Charlamos de tu negocio?</h2>
     <p class="lede" data-i18n="cta.lede">Contame qué vendés y te muestro cómo se vería tu propio agente.</p>
 
-    <a class="cta-link" href="https://wa.me/5491135841243" data-i18n-aria="cta.ariaLabel" aria-label="Escribir por WhatsApp">
+    <a class="cta-link" href="https://wa.me/5491135841243" data-i18n-aria="cta.ariaLabel" aria-label="Escribir por WhatsApp" id="ctaWhatsapp">
       <div class="input-bar">
-        <span class="input-bar-label" data-i18n="cta.inputLabel">Escribir por WhatsApp</span>
+        <span class="input-bar-label" data-i18n="cta.inputLabel" id="ctaLabel">Escribir por WhatsApp</span>
         <span class="send-btn" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#0a0e17" stroke="#0a0e17" stroke-width="1.4" stroke-linejoin="round"/>
@@ -801,6 +996,7 @@
         </span>
       </div>
     </a>
+    <p class="plan-hint" id="ctaPlanHint" hidden></p>
     <p class="guarantee" data-i18n="cta.guarantee">Sin permanencia forzosa — cancelás el mantenimiento cuando quieras.</p>
   </section>
 
@@ -872,6 +1068,37 @@
         s1: { title: "Contamos tu negocio", text: "Catálogo, precios, tono, forma de cerrar. Una charla, no un formulario." },
         s2: { title: "Lo armamos y lo probamos", text: "Se prueba en tu propio WhatsApp antes de salir en vivo con clientes reales." },
         s3: { title: "Empieza a responder solo", text: "Vos seguís con tu negocio. El agente atiende mientras tanto, y vos ves todo desde un panel." }
+      },
+      plans: {
+        divider: "Planes y precios",
+        p1: {
+          name: "Plan Inicial",
+          pitch: "Para arrancar ya: tu agente queda respondiendo desde el primer día, con todo lo importante ya incluido.",
+          f1: "Se acuerda de cada persona que le escribió antes",
+          f2: "Entiende y responde en español, inglés o italiano",
+          f3: "Nunca inventa un precio ni un link que vos no le diste",
+          f4: "Te avisa apenas deja de responder",
+          f5: "Cobra una seña para reservar turnos, o arma pedidos con carrito — el que necesites",
+          f6: "Sabe tu catálogo y tus precios de memoria",
+          f7: "Le podés preguntar cómo viene el negocio, como a una persona"
+        },
+        p2: {
+          name: "Plan Intermedio",
+          pitch: "Para cuando ya tenés movimiento y no querés perder ni un mensaje: que te escriban donde te escriban, y que cobre solo.",
+          inherit: "Todo lo del Plan Inicial",
+          f1: "Contesta también en Instagram y en Messenger, como si fuera la misma persona",
+          f2: "Responde las preguntas que te dejan en tus publicaciones de Mercado Libre",
+          f3: "Muestra tu catálogo actualizado, directo desde Tiendanube",
+          f4: "Cobra ahí mismo en la charla, al momento o de forma diferida, y le recuerda a quien no terminó de pagar",
+          f5: "Te genera la factura sola, si la necesitás (Argentina)"
+        },
+        p3: {
+          name: "Plan Personalizado",
+          pitch: "Si tu negocio necesita algo puntual — vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista — te lo armamos a tu medida."
+        },
+        ctaLabelWithPlan: "Escribir por WhatsApp sobre el {plan}",
+        ctaHint: "Le vas a escribir a Ada mencionando el {plan} — podés cambiar el mensaje antes de mandarlo",
+        waMessage: "Hola, me interesa el {plan}"
       },
       about: {
         divider: "Quiénes somos",
@@ -946,6 +1173,37 @@
         s2: { title: "We build it and test it", text: "It's tested on your own WhatsApp before going live with real customers." },
         s3: { title: "It starts answering on its own", text: "You keep running your business. The agent handles it meanwhile, and you see everything from a dashboard." }
       },
+      plans: {
+        divider: "Plans and pricing",
+        p1: {
+          name: "Starter Plan",
+          pitch: "To get started right away: your agent is up and answering from day one, with everything important already included.",
+          f1: "Remembers every person who's written to it before",
+          f2: "Understands and replies in Spanish, English, or Italian",
+          f3: "Never makes up a price or a link you didn't give it",
+          f4: "Alerts you the moment it stops responding",
+          f5: "Collects a deposit to book appointments, or handles cart orders — whichever you need",
+          f6: "Knows your catalog and prices by heart",
+          f7: "You can ask it how the business is doing, like you would a person"
+        },
+        p2: {
+          name: "Growth Plan",
+          pitch: "For when things are already moving and you don't want to miss a single message: wherever they write to you, and it collects payment on its own.",
+          inherit: "Everything in the Starter Plan",
+          f1: "Also replies on Instagram and Messenger, as if it were the same person",
+          f2: "Answers the questions people leave on your Mercado Libre listings",
+          f3: "Shows your catalog live, straight from Tiendanube",
+          f4: "Charges right there in the chat, upfront or deferred, and reminds anyone who didn't finish paying",
+          f5: "Generates the invoice on its own, if you need it (Argentina)"
+        },
+        p3: {
+          name: "Custom Plan",
+          pitch: "If your business needs something specific — wholesale orders, an event with limited spots, monthly billing, showing properties, deadline reminders, or anything that doesn't exist yet — we build it to your measure."
+        },
+        ctaLabelWithPlan: "Message on WhatsApp about the {plan}",
+        ctaHint: "You're about to message Ada mentioning the {plan} — you can edit the message before sending it",
+        waMessage: "Hi, I'm interested in the {plan}"
+      },
       about: {
         divider: "Who we are",
         text: "We're <strong>IAmatic Solutions</strong>, a new team focused on a single problem: no business should lose a sale by not answering WhatsApp in time. We don't sell a generic platform — we build every agent to measure, business by business, and test it on your own WhatsApp before it ever talks to a real customer."
@@ -1019,6 +1277,37 @@
         s2: { title: "Lo costruiamo e lo testiamo", text: "Viene testato sul tuo WhatsApp prima di andare live con clienti reali." },
         s3: { title: "Comincia a rispondere da solo", text: "Tu continui con il tuo business. L'agente risponde nel frattempo, e tu vedi tutto da un pannello." }
       },
+      plans: {
+        divider: "Piani e prezzi",
+        p1: {
+          name: "Piano Iniziale",
+          pitch: "Per iniziare subito: il tuo agente risponde già dal primo giorno, con tutto l'importante già incluso.",
+          f1: "Si ricorda di ogni persona che gli ha scritto prima",
+          f2: "Capisce e risponde in spagnolo, inglese o italiano",
+          f3: "Non inventa mai un prezzo o un link che non gli hai dato",
+          f4: "Ti avvisa appena smette di rispondere",
+          f5: "Incassa un acconto per prenotare appuntamenti, o gestisce ordini con carrello — quello che ti serve",
+          f6: "Conosce il tuo catalogo e i tuoi prezzi a memoria",
+          f7: "Puoi chiedergli come va l'attività, come a una persona"
+        },
+        p2: {
+          name: "Piano Intermedio",
+          pitch: "Per quando la tua attività è già avviata e non vuoi perdere nemmeno un messaggio: da qualsiasi canale ti scrivano, e incassa da solo.",
+          inherit: "Tutto quello del Piano Iniziale",
+          f1: "Risponde anche su Instagram e Messenger, come se fosse la stessa persona",
+          f2: "Risponde alle domande lasciate sui tuoi annunci di Mercado Libre",
+          f3: "Mostra il tuo catalogo aggiornato, direttamente da Tiendanube",
+          f4: "Incassa lì nella chat, subito o in modo differito, e ricorda a chi non ha finito di pagare",
+          f5: "Genera la fattura da solo, se ti serve (Argentina)"
+        },
+        p3: {
+          name: "Piano Personalizzato",
+          pitch: "Se la tua attività ha bisogno di qualcosa di specifico — vendite all'ingrosso, un evento a posti limitati, fatturazione mensile, mostrare immobili, avvisi di scadenze, o qualsiasi cosa non esista ancora — te lo costruiamo su misura."
+        },
+        ctaLabelWithPlan: "Scrivi su WhatsApp per il {plan}",
+        ctaHint: "Stai per scrivere ad Ada menzionando il {plan} — puoi modificare il messaggio prima di inviarlo",
+        waMessage: "Ciao, sono interessato al {plan}"
+      },
       about: {
         divider: "Chi siamo",
         text: "Siamo <strong>IAmatic Solutions</strong>, un team nuovo concentrato su un solo problema: che nessuna attività perda una vendita per non rispondere in tempo su WhatsApp. Non vendiamo una piattaforma generica — costruiamo ogni agente su misura, attività per attività, e lo testiamo sul tuo WhatsApp prima che parli con un cliente vero."
@@ -1048,8 +1337,12 @@
     }
   };
 
+  var currentDict = I18N.es;
+  var selectedPlanKey = null;
+
   function applyLang(lang) {
     var dict = I18N[lang] || I18N.es;
+    currentDict = dict;
     document.documentElement.lang = lang;
     document.title = dict.meta.title;
     var metaDesc = document.querySelector('meta[name="description"]');
@@ -1072,6 +1365,8 @@
     });
 
     try { localStorage.setItem('lang', lang); } catch (e) {}
+
+    if (typeof window.refreshPlanCta === 'function') window.refreshPlanCta();
   }
 
   document.querySelectorAll('.lang-btn').forEach(function (btn) {
@@ -1085,6 +1380,57 @@
   var initialLang = 'es';
   try { initialLang = localStorage.getItem('lang') || 'es'; } catch (e) {}
   applyLang(initialLang);
+
+  // ---------- selección de plan: precarga el mensaje de WhatsApp ----------
+  (function () {
+    var WHATSAPP_NUMBER = '5491135841243';
+    var cards = document.querySelectorAll('.plan-card');
+    var ctaLink = document.getElementById('ctaWhatsapp');
+    var ctaLabel = document.getElementById('ctaLabel');
+    var ctaPlanHint = document.getElementById('ctaPlanHint');
+    var defaultHref = ctaLink.getAttribute('href');
+
+    window.refreshPlanCta = function () {
+      var plansDict = currentDict.plans || I18N.es.plans;
+      if (selectedPlanKey && plansDict[selectedPlanKey]) {
+        var planName = plansDict[selectedPlanKey].name;
+        var waText = plansDict.waMessage.replace('{plan}', planName);
+        ctaLink.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waText);
+        ctaLabel.textContent = plansDict.ctaLabelWithPlan.replace('{plan}', planName);
+        ctaPlanHint.textContent = plansDict.ctaHint.replace('{plan}', planName);
+        ctaPlanHint.hidden = false;
+      } else {
+        ctaLink.href = defaultHref;
+        ctaLabel.textContent = currentDict.cta.inputLabel;
+        ctaPlanHint.hidden = true;
+      }
+    };
+
+    function select(card) {
+      var key = card.getAttribute('data-plan-key');
+      var wasSelected = selectedPlanKey === key;
+      cards.forEach(function (c) {
+        c.classList.remove('selected');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      selectedPlanKey = wasSelected ? null : key;
+      if (!wasSelected) {
+        card.classList.add('selected');
+        card.setAttribute('aria-pressed', 'true');
+      }
+      refreshPlanCta();
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () { select(card); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          select(card);
+        }
+      });
+    });
+  })();
 </script>
 
 </body>
