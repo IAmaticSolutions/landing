@@ -493,7 +493,6 @@
     font-size: 14px;
     line-height: 1.55;
   }
-  .plan-feature.inherit .dot { background: var(--ink-line); }
   .plan-feature.inherit span:last-child { color: var(--muted); font-style: italic; }
   .plan-hint {
     margin-top: 14px;
@@ -919,7 +918,11 @@
           <div class="plan-dot" aria-hidden="true"></div>
           <div class="signal-bars level-3"><i></i><i></i><i></i></div>
           <h3 class="plan-name" data-i18n="plans.p3.name">Plan Personalizado</h3>
-          <p class="plan-pitch" data-i18n="plans.p3.pitch">Si tu negocio necesita algo puntual — vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista — te lo armamos a tu medida.</p>
+          <div class="plan-features">
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p3.f1">Todo lo anterior, más lo que tu negocio necesite puntualmente</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p3.f2">Vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista</span></div>
+            <div class="plan-feature"><span class="dot"></span><span data-i18n="plans.p3.f3">Te lo armamos a tu medida</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1094,7 +1097,9 @@
         },
         p3: {
           name: "Plan Personalizado",
-          pitch: "Si tu negocio necesita algo puntual — vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista — te lo armamos a tu medida."
+          f1: "Todo lo anterior, más lo que tu negocio necesite puntualmente",
+          f2: "Vender por mayor, organizar un evento con cupo limitado, cobrar todos los meses, mostrar propiedades, avisar vencimientos, o lo que sea que todavía no exista",
+          f3: "Te lo armamos a tu medida"
         },
         ctaLabelWithPlan: "Escribir por WhatsApp sobre el {plan}",
         ctaHint: "Le vas a escribir a Ada mencionando el {plan} — podés cambiar el mensaje antes de mandarlo",
@@ -1198,7 +1203,9 @@
         },
         p3: {
           name: "Custom Plan",
-          pitch: "If your business needs something specific — wholesale orders, an event with limited spots, monthly billing, showing properties, deadline reminders, or anything that doesn't exist yet — we build it to your measure."
+          f1: "Everything above, plus whatever your business needs specifically",
+          f2: "Wholesale orders, an event with limited spots, monthly billing, showing properties, deadline reminders, or anything that doesn't exist yet",
+          f3: "We build it to your measure"
         },
         ctaLabelWithPlan: "Message on WhatsApp about the {plan}",
         ctaHint: "You're about to message Ada mentioning the {plan} — you can edit the message before sending it",
@@ -1302,7 +1309,9 @@
         },
         p3: {
           name: "Piano Personalizzato",
-          pitch: "Se la tua attività ha bisogno di qualcosa di specifico — vendite all'ingrosso, un evento a posti limitati, fatturazione mensile, mostrare immobili, avvisi di scadenze, o qualsiasi cosa non esista ancora — te lo costruiamo su misura."
+          f1: "Tutto quanto sopra, più quello di cui la tua attività ha bisogno di volta in volta",
+          f2: "Vendite all'ingrosso, un evento a posti limitati, fatturazione mensile, mostrare immobili, avvisi di scadenze, o qualsiasi cosa non esista ancora",
+          f3: "Te lo costruiamo su misura"
         },
         ctaLabelWithPlan: "Scrivi su WhatsApp per il {plan}",
         ctaHint: "Stai per scrivere ad Ada menzionando il {plan} — puoi modificare il messaggio prima di inviarlo",
